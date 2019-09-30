@@ -4,7 +4,7 @@ export default class CreateInventory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inventory_description: '',
+            description: '',
         }
 
         this.onChangeInventoryDescription = this.onChangeInventoryDescription.bind(this);
@@ -13,7 +13,7 @@ export default class CreateInventory extends Component {
 
     onChangeInventoryDescription(e) {
         this.setState({
-            inventory_description: e.target.value
+            description: e.target.value
         });
     }
 
@@ -21,10 +21,10 @@ export default class CreateInventory extends Component {
         e.preventDefault();
 
         console.log(`Form submitted:`);
-        console.log(`inventory Description: ${this.state.inventory_description}`);
+        console.log(`Inventory Description: ${this.state.description}`);
 
         this.setState({
-            inventory_description: '',
+            description: '',
         })
     }
 
@@ -37,7 +37,7 @@ export default class CreateInventory extends Component {
                         <label>Description: </label>
                         <input type="text"
                             className="form-control"
-                            value={this.state.inventory_description}
+                            value={this.state.description}
                             onChange={this.onChangeInventoryDescription}
                         />
                     </div>
