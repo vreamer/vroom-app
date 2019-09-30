@@ -22,7 +22,7 @@ export default class CreateInventory extends Component {
         e.preventDefault();
 
         console.log(`Form submitted: ${this.state.description}`);
-        const apiUrl = process.env.API_URL || 'http://localhost:4000'
+        const apiUrl = process.env.API_URL || 'https://vroom-backend-api.herokuapp.com'
         const inventory = { description: this.state.description }
 
         axios.post(`${apiUrl}/inventory/add`, { inventory })

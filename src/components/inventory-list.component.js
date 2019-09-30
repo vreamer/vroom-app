@@ -8,7 +8,7 @@ export default class InventoryList extends Component {
     }
 
     componentDidMount() {
-        const apiUrl = process.env.API_URL || 'http://localhost:4000'
+        const apiUrl = process.env.API_URL || 'https://vroom-backend-api.herokuapp.com'
         axios.get(`${apiUrl}/inventory`)
             .then(res => {
                 const inventories = res.data.map((i) => ({ id: i.id, description: i.description }))
