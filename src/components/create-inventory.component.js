@@ -4,7 +4,46 @@ import { createInventories } from '../services/inventory-service'
 const listOfInventoriesTypes = [
     'Chipsmore',
     'Oreo box',
-    'Monde Pola'
+    'Monde Pola 10',
+
+    'Santino Expresso Bar',
+    'Boncafe Coffee Beans',
+    'Milk For Coffee Machine 12',
+
+    'Orange',
+    'Lemon',
+    'Grape',
+    'Coca Cola',
+
+    'Milo',
+    'Soya Bean',
+    'Teh Tarik',
+
+    'Milk & Cream 12',
+    'Chocolate Banana 12',
+    'MERLION Durian 15',
+    'Angels Berry 12',
+    'Chocolate 15',
+    'Mango & Passion Fruit 15',
+    'Strawberry Cheesecake 15',
+    'Vanilla 15',
+
+    'Shrimp Wonton Noodles',
+    'Spaghetti with Chicken Sauce',
+    'Stir Fried Chicken & Basil with Rice',
+
+    'Water 24',
+    'Coke',
+    'Tea',
+
+    'Peanut Butter',
+    'Fish biscuits',
+    'Lemon puffs',
+    'Egg Crackers',
+    'Love Letters',
+    'Iced Jems',
+    'Butterfly',
+    'Potato Sticks'
 ]
 
 export default class CreateInventory extends Component {
@@ -30,11 +69,12 @@ export default class CreateInventory extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(Object.keys(this.state.inventory))
+        console.log(Object.entries(this.state.inventory))
 
-        const inventories = Object.keys(this.state.inventory)
-            .map(inventoryType => ({
-                description: inventoryType
+        const inventories = Object.entries(this.state.inventory)
+            .map(([inventoryType, amount]) => ({
+                description: inventoryType,
+                amount: amount
             }))
         createInventories(inventories)
 
