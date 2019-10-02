@@ -6,8 +6,8 @@ export const getAllInventory = () => {
     return axios.get(`${apiUrl}/inventory`)
 }
 
-export const createInventory = (inventory) => {
-    axios.post(`${apiUrl}/inventory/add`, { inventory })
+export const createInventories = (inventories) => {
+    axios.post(`${apiUrl}/inventory/add`, { inventories })
         .then(_ => {
             console.log('add inventory successsfully')
         })
