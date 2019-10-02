@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup'
-import axios from 'axios'
+import { getAllInventory } from '../services/inventory-service'
 
 export default class InventoryList extends Component {
     state = {
@@ -8,8 +8,7 @@ export default class InventoryList extends Component {
     }
 
     componentDidMount() {
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000'
-        axios.get(`${apiUrl}/inventory`)
+        getAllInventory()
             .then(res => {
                 const inventories = res.data.map((i) => ({ id: i._id, description: i.description }))
                 this.setState({ inventories })
@@ -18,7 +17,7 @@ export default class InventoryList extends Component {
 
     showInventoryList() {
         const listItems = this.state.inventories
-        .map(inventory => <ListGroup.Item key={inventory.id}>{inventory.description}</ListGroup.Item>)
+            .map(inventory => <ListGroup.Item key={inventory.id}>{inventory.description}</ListGroup.Item>)
         return (
             <ListGroup>
                 {listItems}

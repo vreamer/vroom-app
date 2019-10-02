@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { createInventory } from '../services/inventory-service'
 
 export default class CreateInventory extends Component {
     constructor(props) {
@@ -20,16 +20,9 @@ export default class CreateInventory extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-
-        console.log(`Form submitted: ${this.state.description}`);
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000'
         const inventory = { description: this.state.description }
-
-        axios.post(`${apiUrl}/inventory/add`, { inventory })
-            .then(res => {
-                console.log('add inventory successsfully')
-            })
-
+        createInventory(inventory)
+        
         this.setState({
             description: '',
         })
