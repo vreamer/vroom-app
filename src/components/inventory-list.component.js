@@ -8,7 +8,7 @@ export default class InventoryList extends Component {
     }
 
     componentDidMount() {
-        const apiUrl = process.env.API_URL || 'http://localhost:4000'
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000'
         axios.get(`${apiUrl}/inventory`)
             .then(res => {
                 const inventories = res.data.map((i) => ({ id: i._id, description: i.description }))
