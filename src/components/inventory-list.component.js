@@ -44,7 +44,6 @@ export default class InventoryList extends Component {
     render() {
         return (
             <div>
-                <p>Welcome to Inventory List Component!!</p>
                 <Row>
                     <Col>{this.showInventoryTypes()}</Col>
                     <Col>{this.showInventoryAmounts()}</Col>

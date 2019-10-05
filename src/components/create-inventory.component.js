@@ -22,12 +22,12 @@ export default class CreateInventory extends Component {
             .then(res => this.setState({inventoryGroups: res.data}))
     }
 
-    onChangeInventoryDescription(e, inventoryType) {
+    onChangeInventoryDescription(e, inventoryItem) {
         const prevInventory = this.state.inventory
         this.setState({
             inventory: {
                 ...prevInventory,
-                [inventoryType]: e.target.value
+                [inventoryItem.title]: e.target.value
             }
         });
     }
@@ -37,8 +37,8 @@ export default class CreateInventory extends Component {
         console.log(Object.entries(this.state.inventory))
 
         const inventories = Object.entries(this.state.inventory)
-            .map(([inventoryType, amount]) => ({
-                description: inventoryType,
+            .map(([inventoryTitle, amount]) => ({
+                description: inventoryTitle,
                 amount: amount
             }))
         createInventories(inventories)
@@ -48,27 +48,27 @@ export default class CreateInventory extends Component {
         })
     }
 
-    _renderInventoryItems(inventoryTypes) {
-        return inventoryTypes.map(inventoryType => (
-            <div className="form-group" key={inventoryType}>
-                <label>{inventoryType}: </label>
+    _renderInventoryItems(inventoryItems) {
+        return inventoryItems.map(inventoryItem => (
+            <div className="form-group" key={inventoryItem.title}>
+                <label>{inventoryItem.title}: </label>
                 <input type="number"
                     className="form-control"
-                    value={this.state[inventoryType]}
-                    onChange={(e) => this.onChangeInventoryDescription(e, inventoryType)}
+                    value={this.state[inventoryItem.title]}
+                    onChange={(e) => this.onChangeInventoryDescription(e, inventoryItem)}
                 />
             </div>
         ))
     }
 
-    _renderInventoryGroup(groupType, inventoryTypes) {
+    _renderInventoryGroup(groupType, inventoryItems) {
         return (
             <Card key={groupType}>
                 <Accordion.Toggle as={Card.Header} eventKey={groupType}>
                     {groupType}
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={groupType}>
-                    <Card.Body>{this._renderInventoryItems(inventoryTypes)}</Card.Body>
+                    <Card.Body>{this._renderInventoryItems(inventoryItems)}</Card.Body>
                 </Accordion.Collapse>
             </Card>
         )
@@ -78,7 +78,7 @@ export default class CreateInventory extends Component {
         return (
             <Accordion>
                 {Object.entries(this.state.inventoryGroups)
-                    .map(([groupType, inventoryTypes]) => this._renderInventoryGroup(groupType, inventoryTypes))}
+                    .map(([groupType, inventoryItems]) => this._renderInventoryGroup(groupType, inventoryItems))}
             </Accordion>
         )
     }
