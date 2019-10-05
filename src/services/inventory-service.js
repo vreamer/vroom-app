@@ -12,3 +12,7 @@ export const createInventories = (inventories) => {
             console.log('add inventory successsfully')
         })
 }
+
+export const getInventoryGroups = () => {
+    return axios.get(`${apiUrl}/inventory-group`)
+}
