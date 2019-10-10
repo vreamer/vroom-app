@@ -20,3 +20,7 @@ export const getInventoryGroups = () => {
 export const getInventoryItems = () => {
     return axios.get(`${apiUrl}/inventory-item`)
 }
+
+export const createInventoryItem = (inventoryItem) => {
+    return axios.post(`${apiUrl}/inventory-item/add`, inventoryItem)
+}
