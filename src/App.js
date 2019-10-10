@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import InventoryList from './components/inventory-list.component'
 import CreateInventoryList from './components/create-inventory.component'
+import CreateInventoryItemsList from './components/create-inventory-items.component'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg'
@@ -25,12 +26,16 @@ class App extends Component {
                 <li className="navbar-item">
                   <Link to="/create" className="nav-link">Create Inventory</Link>
                 </li>
+                <li className="navbar-item">
+                  <Link to="/create-inventory-items" className="nav-link">Update Inventory Items</Link>
+                </li>
               </ul>
             </div>
           </nav>
           <br />
           <Route path="/" exact component={InventoryList} />
           <Route path="/create" component={CreateInventoryList} />
+          <Route path="/create-inventory-items" component={CreateInventoryItemsList} />
         </div>
       </Router>
     );

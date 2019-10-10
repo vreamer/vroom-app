@@ -16,3 +16,7 @@ export const createInventories = (inventories) => {
 export const getInventoryGroups = () => {
     return axios.get(`${apiUrl}/inventory-group`)
 }
+
+export const getInventoryItems = () => {
+    return axios.get(`${apiUrl}/inventory-item`)
+}

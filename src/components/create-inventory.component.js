@@ -4,7 +4,6 @@ import { Accordion, Card, } from 'react-bootstrap'
 import './create-inventory.component.css'
 
 export default class CreateInventory extends Component {
-    
 
     constructor(props) {
         super(props);
