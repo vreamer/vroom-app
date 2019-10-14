@@ -1,9 +1,10 @@
 import axios from 'axios'
+import moment from 'moment'
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000'
 
-export const getAllInventory = () => {
-    return axios.get(`${apiUrl}/inventory`)
+export const getInventoryByDate = (date = moment().format('YYYY-MM-DD')) => {
+    return axios.get(`${apiUrl}/inventory/${date}`)
 }
 
 export const createInventories = (inventories) => {
