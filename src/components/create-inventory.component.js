@@ -16,7 +16,7 @@ export default class CreateInventory extends Component {
             inventoryGroups: {}
         }
 
-        this.onChangeInventoryDescription = this.onChangeInventoryDescription.bind(this);
+        this.onChangeInventory = this.onChangeInventory.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -25,7 +25,7 @@ export default class CreateInventory extends Component {
             .then(res => this.setState({ inventoryGroups: res.data }))
     }
 
-    onChangeInventoryDescription(e, inventoryItem) {
+    onChangeInventory(e, inventoryItem) {
         const prevInventory = this.state.inventory
         this.setState({
             inventory: {
@@ -45,11 +45,10 @@ export default class CreateInventory extends Component {
                 date: today
             }))
         createInventories(inventories)
-            .then(_ => toast("Inventory updated successfully"))
-
-        this.setState({
-            inventory: {},
-        })
+            .then(_ => {
+                toast("Inventory updated successfully");
+                this.setState({ inventory: {} })
+            })
     }
 
     _renderInventoryItems(inventoryItems) {
@@ -58,8 +57,8 @@ export default class CreateInventory extends Component {
                 <label>{inventoryItem.title}: </label>
                 <input type="number"
                     className="form-control"
-                    value={this.state[inventoryItem.title]}
-                    onChange={(e) => this.onChangeInventoryDescription(e, inventoryItem)}
+                    value={this.state.inventory[inventoryItem.title] || ''}
+                    onChange={(e) => this.onChangeInventory(e, inventoryItem)}
                 />
             </div>
         ))
