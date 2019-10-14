@@ -13,7 +13,8 @@ export default class CreateInventory extends Component {
         super(props);
         this.state = {
             inventory: {},
-            inventoryGroups: {}
+            inventoryGroups: {},
+            activeGroup: ''
         }
 
         this.onChangeInventory = this.onChangeInventory.bind(this);
@@ -23,6 +24,14 @@ export default class CreateInventory extends Component {
     componentDidMount() {
         getInventoryGroups()
             .then(res => this.setState({ inventoryGroups: res.data }))
+    }
+
+    toggleInventoryGroup(activeGroup) {
+        if (this.state.activeGroup === activeGroup) {
+            this.setState({ activeGroup: '' })
+            return
+        }
+        this.setState({ activeGroup })
     }
 
     onChangeInventory(e, inventoryItem) {
@@ -47,7 +56,7 @@ export default class CreateInventory extends Component {
         createInventories(inventories)
             .then(_ => {
                 toast("Inventory updated successfully");
-                this.setState({ inventory: {} })
+                this.setState({ inventory: {}, activeGroup: '' })
             })
     }
 
@@ -67,7 +76,7 @@ export default class CreateInventory extends Component {
     _renderInventoryGroup(groupType, inventoryItems) {
         return (
             <Card key={groupType}>
-                <Accordion.Toggle as={Card.Header} eventKey={groupType}>
+                <Accordion.Toggle as={Card.Header} onClick={() => this.toggleInventoryGroup(groupType)}>
                     {groupType}
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={groupType}>
@@ -79,7 +88,7 @@ export default class CreateInventory extends Component {
 
     renderInventoryGroups() {
         return (
-            <Accordion>
+            <Accordion activeKey={this.state.activeGroup}>
                 {Object.entries(this.state.inventoryGroups)
                     .map(([groupType, inventoryItems]) => this._renderInventoryGroup(groupType, inventoryItems))}
             </Accordion>
