@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createInventories, getInventoryGroups } from '../services/inventory-service'
 import { Accordion, Card, } from 'react-bootstrap'
 import './create-inventory.component.css'
+import moment from 'moment'
 
 export default class CreateInventory extends Component {
 
@@ -9,7 +10,8 @@ export default class CreateInventory extends Component {
         super(props);
         this.state = {
             inventory: {},
-            inventoryGroups: {}
+            inventoryGroups: {},
+            today: moment().format('YYYY-MM-DD')
         }
 
         this.onChangeInventoryDescription = this.onChangeInventoryDescription.bind(this);
@@ -38,7 +40,8 @@ export default class CreateInventory extends Component {
         const inventories = Object.entries(this.state.inventory)
             .map(([inventoryTitle, amount]) => ({
                 description: inventoryTitle,
-                amount: amount
+                amount: amount,
+                date: this.state.today
             }))
         createInventories(inventories)
 
@@ -85,7 +88,7 @@ export default class CreateInventory extends Component {
     render() {
         return (
             <div style={{ marginTop: 10 }}>
-                <h3>Create New Inventory</h3>
+                <h3>Create New Inventory {this.state.today}</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-fields-container">
                         {this.renderInventoryGroups()}
