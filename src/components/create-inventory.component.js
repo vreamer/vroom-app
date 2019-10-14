@@ -3,6 +3,7 @@ import { createInventories, getInventoryGroups } from '../services/inventory-ser
 import { Accordion, Card, } from 'react-bootstrap'
 import './create-inventory.component.css'
 import { getTodayISO } from '../services/date-service'
+import { toast } from 'react-toastify';
 
 const today = getTodayISO()
 
@@ -36,7 +37,6 @@ export default class CreateInventory extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(Object.entries(this.state.inventory))
 
         const inventories = Object.entries(this.state.inventory)
             .map(([inventoryTitle, amount]) => ({
@@ -45,6 +45,7 @@ export default class CreateInventory extends Component {
                 date: today
             }))
         createInventories(inventories)
+            .then(_ => toast("Inventory updated successfully"))
 
         this.setState({
             inventory: {},

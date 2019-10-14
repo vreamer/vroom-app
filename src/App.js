@@ -6,7 +6,9 @@ import CreateInventoryList from './components/create-inventory.component'
 import CreateInventoryItemsList from './components/create-inventory-items.component'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import logo from './logo.svg'
+import { ToastContainer } from 'react-toastify';
 
 class App extends Component {
   render() {
@@ -36,6 +38,7 @@ class App extends Component {
           <Route path="/" exact component={InventoryList} />
           <Route path="/create" component={CreateInventoryList} />
           <Route path="/create-inventory-items" component={CreateInventoryItemsList} />
+          <ToastContainer />
         </div>
       </Router>
     );

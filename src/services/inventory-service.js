@@ -7,10 +7,7 @@ export const getInventoryByDate = (date) => {
 }
 
 export const createInventories = (inventories) => {
-    axios.post(`${apiUrl}/inventory/add`, { inventories })
-        .then(_ => {
-            console.log('add inventory successsfully')
-        })
+    return axios.post(`${apiUrl}/inventory/add`, { inventories })
 }
 
 export const getInventoryGroups = () => {
