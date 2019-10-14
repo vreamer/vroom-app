@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { createInventories, getInventoryGroups } from '../services/inventory-service'
 import { Accordion, Card, } from 'react-bootstrap'
 import './create-inventory.component.css'
-import moment from 'moment'
+import { getTodayISO } from '../services/date-service'
+
+const today = getTodayISO()
 
 export default class CreateInventory extends Component {
 
@@ -10,8 +12,7 @@ export default class CreateInventory extends Component {
         super(props);
         this.state = {
             inventory: {},
-            inventoryGroups: {},
-            today: moment().format('YYYY-MM-DD')
+            inventoryGroups: {}
         }
 
         this.onChangeInventoryDescription = this.onChangeInventoryDescription.bind(this);
@@ -20,7 +21,7 @@ export default class CreateInventory extends Component {
 
     componentDidMount() {
         getInventoryGroups()
-            .then(res => this.setState({inventoryGroups: res.data}))
+            .then(res => this.setState({ inventoryGroups: res.data }))
     }
 
     onChangeInventoryDescription(e, inventoryItem) {
@@ -41,7 +42,7 @@ export default class CreateInventory extends Component {
             .map(([inventoryTitle, amount]) => ({
                 description: inventoryTitle,
                 amount: amount,
-                date: this.state.today
+                date: today
             }))
         createInventories(inventories)
 
@@ -88,7 +89,7 @@ export default class CreateInventory extends Component {
     render() {
         return (
             <div style={{ marginTop: 10 }}>
-                <h3>Create New Inventory {this.state.today}</h3>
+                <h3>Create New Inventory {today}</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-fields-container">
                         {this.renderInventoryGroups()}
