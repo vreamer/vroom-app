@@ -38,7 +38,10 @@ class App extends Component {
           <Route path="/" exact component={InventoryList} />
           <Route path="/create" component={CreateInventoryList} />
           <Route path="/create-inventory-items" component={CreateInventoryItemsList} />
-          <ToastContainer />
+          <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar />
         </div>
       </Router>
     );

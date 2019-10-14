@@ -55,7 +55,7 @@ export default class CreateInventory extends Component {
             }))
         createInventories(inventories)
             .then(_ => {
-                toast("Inventory updated successfully");
+                toast.success("Inventory updated successfully");
                 this.setState({ inventory: {}, activeGroup: '' })
             })
     }
