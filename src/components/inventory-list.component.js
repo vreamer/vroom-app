@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import ListGroup from 'react-bootstrap/ListGroup'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Table from 'react-bootstrap/Table'
 import { getInventoryByDate } from '../services/inventory-service'
 import { getTodayISO } from '../services/date-service'
 
@@ -24,34 +22,31 @@ export default class InventoryList extends Component {
             })
     }
 
-    showInventoryTypes() {
-        const listItems = this.state.inventories
-            .map(inventory => <ListGroup.Item key={inventory.id + '_type'}>{inventory.description}</ListGroup.Item>)
-        return (
-            <ListGroup>
-                {listItems}
-            </ListGroup>
-        )
-    }
-
-    showInventoryAmounts() {
-        const listItems = this.state.inventories
-            .map(inventory => <ListGroup.Item key={inventory.id + '_amount'} variant='info'>{inventory.amount}</ListGroup.Item>)
-        return (
-            <ListGroup>
-                {listItems}
-            </ListGroup>
-        )
+    _renderInventories() {
+        return this.state.inventories
+            .map(inventory => (
+                <tr key={inventory.id}>
+                    <td>{inventory.description}</td>
+                    <td>{inventory.amount}</td>
+                </tr>
+            ))
     }
 
     render() {
         return (
             <div>
                 <h3>Inventory List for {today}</h3>
-                <Row>
-                    <Col>{this.showInventoryTypes()}</Col>
-                    <Col>{this.showInventoryAmounts()}</Col>
-                </Row>
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this._renderInventories()}
+                    </tbody>
+                </Table>
             </div>
         )
     }
