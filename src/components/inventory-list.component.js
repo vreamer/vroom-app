@@ -14,7 +14,7 @@ export default class InventoryList extends Component {
         getInventoryByDate(today)
             .then(res => {
                 const inventories = res.data.map((i) => ({
-                    id: i._id,
+                    id: i.description,
                     description: i.description,
                     amount: i.amount
                 }))
