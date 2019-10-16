@@ -17,7 +17,7 @@ class App extends Component {
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="https://vroom-app.herokuapp.com/" target="_blank" rel="noopener noreferrer">
-              <img src={logo} width="30" height="30" />
+              <img src={logo} width="30" height="30" alt="logo"/>
             </a>
             <Link to="/" className="navbar-brand">V Room App</Link>
             <div className="collpase navbar-collapse">
