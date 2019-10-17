@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table'
 import { getInventoryByDate } from '../services/inventory-service'
 import { getTodayISO } from '../services/date-service'
+import copy from 'clipboard-copy'
 
 const today = getTodayISO()
 
@@ -22,6 +23,10 @@ export default class InventoryList extends Component {
             })
     }
 
+    copyAllInventory() {
+        copy(this.state.inventories.map(i => i.amount).join('\t'))
+    }
+
     _renderInventories() {
         return this.state.inventories
             .map(inventory => (
@@ -36,6 +41,7 @@ export default class InventoryList extends Component {
         return (
             <div>
                 <h3>Inventory List for {today}</h3>
+                <button onClick={() => this.copyAllInventory()} className="btn btn-primary">Copy All Inventories</button>
                 <Table>
                     <thead>
                         <tr>
