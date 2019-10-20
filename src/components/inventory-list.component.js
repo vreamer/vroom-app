@@ -24,7 +24,8 @@ export default class InventoryList extends Component {
     }
 
     copyAllInventory() {
-        copy(this.state.inventories.map(i => i.amount).join('\t'))
+        const asciiTab = String.fromCharCode(9)
+        copy(this.state.inventories.map(i => i.amount).join(asciiTab))
     }
 
     _renderInventories() {
