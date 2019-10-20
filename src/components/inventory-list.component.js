@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table'
 import { getInventoryByDate } from '../services/inventory-service'
 import { getTodayISO } from '../services/date-service'
 import InventoryCopy from './inventory-copy.component'
+import './inventory-list.component.css'
 
 const today = getTodayISO()
 
@@ -24,10 +25,14 @@ export default class InventoryList extends Component {
             })
     }
 
+    _isInventoryInDanger(amount) {
+        return amount > 0 && amount <= 0.5
+    }
+
     _renderInventories() {
         return this.state.inventories
             .map(inventory => (
-                <tr key={inventory.id}>
+                <tr class={this._isInventoryInDanger(inventory.amount) ? 'inventory-in-danger' : ''} key={inventory.id}>
                     <td>{inventory.description}</td>
                     <td>{inventory.amount}</td>
                 </tr>
