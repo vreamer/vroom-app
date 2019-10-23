@@ -30,10 +30,10 @@ export default class InventoryList extends Component {
     }
 
     _renderAddInventory(inventory) {
-        console.log(inventory)
         return (
             <div>
                 <input type="number"
+                    class="form-control"
                     value={this.state.newInventories[inventory.description] || ''}
                     onChange={(e) => this.onChangeInventory(e.target.value, inventory)}
                 />
