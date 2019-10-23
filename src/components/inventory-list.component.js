@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Table from 'react-bootstrap/Table'
+import { Table, InputGroup, FormControl, Button } from 'react-bootstrap'
 import { getInventoryByDate, createInventories } from '../services/inventory-service'
 import { getTodayISO } from '../services/date-service'
 import InventoryCopy from './inventory-copy.component'
@@ -31,16 +31,19 @@ export default class InventoryList extends Component {
 
     _renderAddInventory(inventory) {
         return (
-            <div>
-                <input type="number"
-                    class="form-control"
+            <InputGroup>
+                <FormControl
+                    type="number"
+                    placeholder="Amount"
                     value={this.state.newInventories[inventory.description] || ''}
                     onChange={(e) => this.onChangeInventory(e.target.value, inventory)}
                 />
-                {inventory.stepAmounts.map(i => (
-                    <button className='btn btn-primary' onClick={() => this.onChangeInventory(i, inventory)}>{i}</button>
-                ))}
-            </div>
+                <InputGroup.Append>
+                    {inventory.stepAmounts.map(i => (
+                        <Button variant="outline-primary" onClick={() => this.onChangeInventory(i, inventory)}>{i}</Button>
+                    ))}
+                </InputGroup.Append>
+            </InputGroup>
         )
     }
 
