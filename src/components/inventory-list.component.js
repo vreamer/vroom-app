@@ -20,29 +20,26 @@ export default class InventoryList extends Component {
 
     _loadInventories() {
         getInventoryByDate(today)
-        .then(res => {
-            const inventories = res.data.map((i) => ({
-                id: i.description,
-                description: i.description,
-                amount: i.amount,
-                hasStockIn: i.hasStockIn
-            }))
-            this.setState({ inventories })
-        })
+            .then(res => {
+                this.setState({ inventories: res.data })
+            })
     }
 
     _isInventoryInDanger(amount) {
         return amount > 0 && amount <= 0.5
     }
-    
+
     _renderAddInventory(inventory) {
         console.log(inventory)
         return (
             <div>
                 <input type="number"
                     value={this.state.newInventories[inventory.description] || ''}
-                    onChange={(e) => this.onChangeInventory(e, inventory)}
+                    onChange={(e) => this.onChangeInventory(e.target.value, inventory)}
                 />
+                {inventory.stepAmounts.map(i => (
+                    <button className='btn btn-primary' onClick={() => this.onChangeInventory(i, inventory)}>{i}</button>
+                ))}
             </div>
         )
     }
@@ -50,7 +47,7 @@ export default class InventoryList extends Component {
     _renderInventories() {
         return this.state.inventories
             .map(inventory => (
-                <tr className={this._isInventoryInDanger(inventory.amount) ? 'inventory-in-danger' : ''} key={inventory.id}>
+                <tr className={this._isInventoryInDanger(inventory.amount) ? 'inventory-in-danger' : ''} key={inventory.description}>
                     <td>{inventory.description}</td>
                     <td>{inventory.amount}</td>
                     <td>{this._renderAddInventory(inventory)}</td>
@@ -58,12 +55,13 @@ export default class InventoryList extends Component {
             ))
     }
 
-    onChangeInventory(e, inventory) {
+    onChangeInventory(amount, inventory) {
         const prevInventory = this.state.newInventories
+        const prevAmount = prevInventory[inventory.description] || 0
         this.setState({
             newInventories: {
                 ...prevInventory,
-                [inventory.description]: e.target.value
+                [inventory.description]: prevAmount + amount
             }
         });
     }
