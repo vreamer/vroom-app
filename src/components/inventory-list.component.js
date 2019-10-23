@@ -98,7 +98,9 @@ export default class InventoryList extends Component {
                         {this._renderInventories()}
                     </tbody>
                 </Table>
-                <button className='btn btn-primary float-bottom-right'>Update Inventory</button>
+                <button
+                    className='btn btn-primary float-bottom-right'
+                    onClick={this.saveInventories.bind(this)}>Update Inventory</button>
             </div>
         )
     }
