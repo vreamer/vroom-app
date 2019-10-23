@@ -24,15 +24,11 @@ class App extends Component {
                 <li className="navbar-item">
                   <Link to="/" className="nav-link">Inventory</Link>
                 </li>
-                <li className="navbar-item">
-                  <Link to="/create-inventory-items" className="nav-link">Update Inventory Items</Link>
-                </li>
               </ul>
             </div>
           </nav>
           <br />
           <Route path="/" exact component={InventoryList} />
-          <Route path="/create-inventory-items" component={CreateInventoryItemsList} />
           <ToastContainer
             position="top-center"
             autoClose={1000}
