@@ -40,7 +40,7 @@ export default class InventoryList extends Component {
                 />
                 <InputGroup.Append>
                     {inventory.stepAmounts.map(i => (
-                        <Button variant="outline-primary" onClick={() => this.onChangeInventory(i, inventory)}>{i}</Button>
+                        <Button variant="outline-primary" onClick={() => this.addToInventory(i, inventory)}>{i}</Button>
                     ))}
                 </InputGroup.Append>
             </InputGroup>
@@ -60,13 +60,17 @@ export default class InventoryList extends Component {
 
     onChangeInventory(amount, inventory) {
         const prevInventory = this.state.newInventories
-        const prevAmount = prevInventory[inventory.description] || 0
         this.setState({
             newInventories: {
                 ...prevInventory,
-                [inventory.description]: prevAmount + amount
+                [inventory.description]: amount
             }
         });
+    }
+
+    addToInventory(amount, inventory) {
+        const prevAmount = this.state.newInventories[inventory.description] || 0
+        this.onChangeInventory(prevAmount + amount, inventory)
     }
 
     saveInventories() {
