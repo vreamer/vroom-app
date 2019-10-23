@@ -1,9 +1,0 @@
-.submit-button-container {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.submit-button-container input {
-    width: 100%
-}
