@@ -88,7 +88,13 @@ export default class InventoryList extends Component {
         return (
             <div>
                 <h3>Inventory List for {today}</h3>
-                <InventoryCopy inventories={this.state.inventories}></InventoryCopy>
+                <hr className='divider'></hr>
+                <div className='float-top-left'>
+                    <InventoryCopy inventories={this.state.inventories}></InventoryCopy>
+                    <button
+                        className='btn btn-primary'
+                        onClick={this.saveInventories.bind(this)}>Update Inventory</button>
+                </div>
                 <Table>
                     <thead>
                         <tr>
@@ -101,9 +107,6 @@ export default class InventoryList extends Component {
                         {this._renderInventories()}
                     </tbody>
                 </Table>
-                <button
-                    className='btn btn-primary float-bottom-right'
-                    onClick={this.saveInventories.bind(this)}>Update Inventory</button>
             </div>
         )
     }

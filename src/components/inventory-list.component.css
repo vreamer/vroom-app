@@ -2,8 +2,12 @@
     background: rgba(255, 0, 0, 0.3);
 }
 
-.float-bottom-right {
+.float-top-left {
     position: fixed;
-    bottom:40px;
-	right:40px;
+    top: 8.5rem;
+    left: 10.5rem;
+}
+
+.divider {
+    margin-bottom: 3rem;
 }
