@@ -92,8 +92,7 @@ export default class InventoryList extends Component {
         return (
             <div>
                 <h3>Inventory List for {today}</h3>
-                <hr className='divider'></hr>
-                <div className='float-top-left'>
+                <div>
                     <InventoryCopy inventories={this.state.inventories}></InventoryCopy>
                     <button
                         className='btn btn-primary'
