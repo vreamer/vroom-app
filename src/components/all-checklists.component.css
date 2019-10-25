@@ -1,0 +1,8 @@
+.step-details-image {
+    width: 8rem;
+}
+
+.list-group-item.checklist-step-list-item {
+    display: flex;
+    justify-content: space-between;
+}
