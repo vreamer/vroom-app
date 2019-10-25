@@ -53,7 +53,7 @@ export default class AllChecklists extends React.Component {
                     <Modal.Title>{this.state.currentStepDetails.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img className='step-details-image' src={this.state.currentStepDetails.image} />
+                    <img className='step-details-image' src={this.state.currentStepDetails.image} alt='step image' />
                     {this.state.currentStepDetails.description}
                 </Modal.Body>
             </Modal>
