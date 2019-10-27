@@ -1,5 +1,4 @@
 import React from 'react';
-import { getChecklists } from '../../services/checklist-service'
 import { Accordion, Card, Button, ListGroup, Modal } from 'react-bootstrap'
 import './all-checklists.component.css'
 
@@ -7,7 +6,6 @@ export default class AllChecklists extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            checklists: [],
             showStepDetails: false,
             currentStepDetails: {}
         }
@@ -15,13 +13,8 @@ export default class AllChecklists extends React.Component {
         this.close = this.close.bind(this)
     }
 
-    componentDidMount() {
-        getChecklists()
-            .then(res => this.setState({ checklists: res.data }))
-    }
-
     _renderChecklists() {
-        const checklists = this.state.checklists.map(c => (
+        const checklists = this.props.checklists.map(c => (
             <Card key={c.title}>
                 <Accordion.Toggle as={Card.Header} eventKey={c.title}>
                     {c.title}</Accordion.Toggle>
@@ -53,7 +46,7 @@ export default class AllChecklists extends React.Component {
                     <Modal.Title>{this.state.currentStepDetails.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img className='step-details-image' src={this.state.currentStepDetails.image} alt='step image' />
+                    <img className='step-details-image' src={this.state.currentStepDetails.image} alt='step details' />
                     {this.state.currentStepDetails.description}
                 </Modal.Body>
             </Modal>

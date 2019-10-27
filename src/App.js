@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import InventoryList from './components/inventory-list.component'
-import AllChecklists from './components/checklist/all-checklists.component'
+import ChecklistContainer from './components/checklist/checklists.container'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,7 +31,7 @@ class App extends Component {
             </div>
           </nav>
           <br />
-          <Route path="/" exact component={AllChecklists} />
+          <Route path="/" exact component={ChecklistContainer} />
           <Route path="/inventory" exact component={InventoryList} />
           <ToastContainer
             position="top-center"
