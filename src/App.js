@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import InventoryList from './components/inventory-list.component'
-import AllChecklists from './components/all-checklists.component'
+import AllChecklists from './components/checklist/all-checklists.component'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';

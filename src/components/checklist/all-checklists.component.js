@@ -1,5 +1,5 @@
 import React from 'react';
-import { getChecklists } from '../services/checklist-service'
+import { getChecklists } from '../../services/checklist-service'
 import { Accordion, Card, Button, ListGroup, Modal } from 'react-bootstrap'
 import './all-checklists.component.css'
 
