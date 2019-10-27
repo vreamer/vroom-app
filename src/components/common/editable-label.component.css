@@ -1,0 +1,8 @@
+.editable-label-container {
+    width: 100%;
+}
+
+.edit-label-view {
+    display: flex;
+    justify-content: space-between;
+}
