@@ -1,5 +1,5 @@
 import React from 'react'
-import { updateChecklistStep, updateChecklistStepImage } from '../../services/checklist-service'
+import { updateChecklistStep } from '../../services/checklist-service'
 import { toast } from 'react-toastify'
 import { Button } from 'react-bootstrap'
 import './update-checklist-step.component.css'
