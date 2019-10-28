@@ -8,10 +8,14 @@ export default class UpdateChecklistStep extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: props.step.title
+            title: props.step.title,
+            imageUrl: props.step.image,
+            imageFile: null
         }
         this.onTitleChange = this.onTitleChange.bind(this)
         this.updateTitle = this.updateTitle.bind(this)
+
+        this.onImageChange = this.onImageChange.bind(this)
     }
 
     onTitleChange(e) {
@@ -26,9 +30,19 @@ export default class UpdateChecklistStep extends React.Component {
             })
     }
 
+    onImageChange(e) {
+        this.setState({
+            imageUrl: URL.createObjectURL(e.target.files[0]),
+            imageFile: e.target.files[0]
+        })
+    }
+
     render() {
+        const imageEl = this.state.imageUrl ? <img className='step-image-upload' src={this.state.imageUrl} alt='upload'/> : ''
         return (
             <div className='update-checklist-step-container'>
+                <input type='file' onChange={this.onImageChange}/>
+                {imageEl}
                 <input type='text' className='form-control' value={this.state.title} onChange={this.onTitleChange} />
                 <Button onClick={this.updateTitle}>Update</Button>
             </div>

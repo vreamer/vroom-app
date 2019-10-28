@@ -3,10 +3,6 @@ import { Accordion, Card, ListGroup } from 'react-bootstrap'
 import UpdateChecklistStep from './update-checklist-step.component'
 
 export default class UpdateChecklists extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     _renderChecklists() {
         const checklists = this.props.checklists.map(c => (
             <Card key={c.title}>
