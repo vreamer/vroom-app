@@ -41,7 +41,7 @@ export default class UpdateChecklistStep extends React.Component {
         const imageEl = this.state.imageUrl ? <img className='step-image-upload' src={this.state.imageUrl} alt='upload' /> : ''
         return (
             <div className='update-checklist-step-container'>
-                <input type='file' onChange={this.onImageChange} />
+                <input type='file' onChange={this.onImageChange} accept='.gif,.jpg,.jpeg,.png'/>
                 {imageEl}
                 <input type='text' className='form-control' value={this.state.title} onChange={this.onTitleChange} />
                 <Button onClick={this.updateTitle}>Update</Button>
