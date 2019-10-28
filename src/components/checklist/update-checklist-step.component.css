@@ -1,7 +1,5 @@
 .update-checklist-step-container {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
 }
 
 .step-image-upload {

@@ -1,0 +1,9 @@
+.file-dropzone {
+    width: 8rem;
+    height: 8rem;
+    border: .2rem dashed #dfe3e8;
+}
+
+.dropzone-text {
+    margin: 10%;
+}

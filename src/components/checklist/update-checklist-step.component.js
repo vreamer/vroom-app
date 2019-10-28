@@ -1,7 +1,8 @@
 import React from 'react'
 import { updateChecklistStep } from '../../services/checklist-service'
 import { toast } from 'react-toastify'
-import { Button } from 'react-bootstrap'
+import { Button, Row, Col } from 'react-bootstrap'
+import { FileDropZone } from '../common/file-drop-zone.component'
 import './update-checklist-step.component.css'
 
 export default class UpdateChecklistStep extends React.Component {
@@ -30,20 +31,28 @@ export default class UpdateChecklistStep extends React.Component {
             })
     }
 
-    onImageChange(e) {
+    onImageChange(files) {
         this.setState({
-            imageUrl: URL.createObjectURL(e.target.files[0]),
-            imageFile: e.target.files[0]
+            imageUrl: URL.createObjectURL(files[0]),
+            imageFile: files[0]
         })
     }
 
     render() {
-        const imageEl = this.state.imageUrl ? <img className='step-image-upload' src={this.state.imageUrl} alt='upload' /> : ''
+        const imageEl = this.state.imageUrl ? <Col><img className='step-image-upload' src={this.state.imageUrl} alt='upload' /></Col> : ''
         return (
             <div className='update-checklist-step-container'>
-                <input type='file' onChange={this.onImageChange} accept='.gif,.jpg,.jpeg,.png'/>
-                {imageEl}
-                <input type='text' className='form-control' value={this.state.title} onChange={this.onTitleChange} />
+                <div>
+                    <Row>
+                        <Col md={2}>
+                            <label>Step Image:</label>
+                            <FileDropZone onDrop={this.onImageChange} accept={"image/*"} />
+                        </Col>
+                        {imageEl}
+                    </Row>
+                    <label for={this.props.step._id + 'title'}>Title:</label>
+                    <input id={this.props.step._id + 'title'} type='text' className='form-control' value={this.state.title} onChange={this.onTitleChange} />
+                </div>
                 <Button onClick={this.updateTitle}>Update</Button>
             </div>
         )
