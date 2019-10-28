@@ -6,7 +6,7 @@ export default class EditableLabel extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isEditing: false,
+            isEditing: true,
             label: props.label
         }
         this.editLabel = this.editLabel.bind(this)
