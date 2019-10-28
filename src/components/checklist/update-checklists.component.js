@@ -1,21 +1,10 @@
 import React from 'react'
 import { Accordion, Card, ListGroup } from 'react-bootstrap'
-import EditableLabel from '../common/editable-label.component'
-import { updateChecklistStep } from '../../services/checklist-service'
-import { toast } from 'react-toastify'
+import UpdateChecklistStep from './update-checklist-step.component'
 
 export default class UpdateChecklists extends React.Component {
     constructor(props) {
         super(props)
-        this.updateChecklistTitle = this.updateChecklistTitle.bind(this)
-    }
-
-    updateChecklistTitle(title, checklistId, stepId) {
-        updateChecklistStep(title, checklistId, stepId)
-            .then(() => {
-                toast.success('Update Step Successfully')
-                this.props.reloadChecklists()
-            })
     }
 
     _renderChecklists() {
@@ -28,7 +17,7 @@ export default class UpdateChecklists extends React.Component {
                         <ListGroup>
                             {c.steps.map(s => (
                                 <ListGroup.Item key={s.title} className="checklist-step-list-item">
-                                    <EditableLabel label={s.title} updateLabel={(title) => this.updateChecklistTitle(title, c._id, s._id)} />
+                                    <UpdateChecklistStep step={s} checklistId={c._id} reloadChecklists={this.props.reloadChecklists} />
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
