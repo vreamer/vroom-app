@@ -23,11 +23,7 @@ export default class UpdateChecklistStep extends React.Component {
     }
 
     updateTitle() {
-        updateChecklistStepImage(this.state.imageFile, this.props.checklistId, this.props.step._id)
-            .then(() => {
-                toast.success('Update Step Image Successfully')
-            })
-        updateChecklistStep(this.state.title, this.props.checklistId, this.props.step._id)
+        updateChecklistStep(this.state.title, this.state.imageFile, this.props.checklistId, this.props.step._id)
             .then(() => {
                 toast.success('Update Step Successfully')
                 this.props.reloadChecklists()

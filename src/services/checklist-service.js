@@ -6,17 +6,14 @@ export const getChecklists = () => {
     return axios.get(`${apiUrl}/checklist`)
 }
 
-export const updateChecklistStep = (stepTitle, checklistId, stepId) => {
-    return axios.put(`${apiUrl}/checklist/${checklistId}/steps/${stepId}`, { title: stepTitle })
-}
-
-export const updateChecklistStepImage = (imageFile, checklistId, stepId) => {
+export const updateChecklistStep = (stepTitle, stepImage, checklistId, stepId) => {
     const formData = new FormData()
-    formData.append('stepImage', imageFile)
+    formData.append('title', stepTitle)
+    formData.append('stepImage', stepImage)
     const headers = {
         headers: {
             'content-type': 'multipart-form-data'
         }
     }
-    return axios.post(`${apiUrl}/checklist/${checklistId}/steps/${stepId}/image`, formData, headers)
+    return axios.put(`${apiUrl}/checklist/${checklistId}/steps/${stepId}`, formData, headers)
 }
