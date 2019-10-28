@@ -1,5 +1,5 @@
 import React from 'react'
-import { updateChecklistStep } from '../../services/checklist-service'
+import { updateChecklistStep, updateChecklistStepImage } from '../../services/checklist-service'
 import { toast } from 'react-toastify'
 import { Button } from 'react-bootstrap'
 import './update-checklist-step.component.css'
@@ -23,6 +23,10 @@ export default class UpdateChecklistStep extends React.Component {
     }
 
     updateTitle() {
+        updateChecklistStepImage(this.state.imageFile, this.props.checklistId, this.props.step._id)
+            .then(() => {
+                toast.success('Update Step Image Successfully')
+            })
         updateChecklistStep(this.state.title, this.props.checklistId, this.props.step._id)
             .then(() => {
                 toast.success('Update Step Successfully')
@@ -38,10 +42,10 @@ export default class UpdateChecklistStep extends React.Component {
     }
 
     render() {
-        const imageEl = this.state.imageUrl ? <img className='step-image-upload' src={this.state.imageUrl} alt='upload'/> : ''
+        const imageEl = this.state.imageUrl ? <img className='step-image-upload' src={this.state.imageUrl} alt='upload' /> : ''
         return (
             <div className='update-checklist-step-container'>
-                <input type='file' onChange={this.onImageChange}/>
+                <input type='file' onChange={this.onImageChange} />
                 {imageEl}
                 <input type='text' className='form-control' value={this.state.title} onChange={this.onTitleChange} />
                 <Button onClick={this.updateTitle}>Update</Button>

@@ -9,3 +9,14 @@ export const getChecklists = () => {
 export const updateChecklistStep = (stepTitle, checklistId, stepId) => {
     return axios.put(`${apiUrl}/checklist/${checklistId}/steps/${stepId}`, { title: stepTitle })
 }
+
+export const updateChecklistStepImage = (imageFile, checklistId, stepId) => {
+    const formData = new FormData()
+    formData.append('stepImage', imageFile)
+    const headers = {
+        headers: {
+            'content-type': 'multipart-form-data'
+        }
+    }
+    return axios.post(`${apiUrl}/checklist/${checklistId}/steps/${stepId}/image`, formData, headers)
+}
