@@ -53,16 +53,22 @@ export default class InventoryList extends Component {
         return this.getFilteredInventories(this.state.inventories, this.state.inventoryFilter)
             .map(inventory => (
                 <tr className={this._isInventoryInDanger(inventory.amount) ? 'inventory-in-danger' : ''} key={inventory.description}>
-                    <td>{inventory.description}</td>
+                    <td><p>{inventory.description}</p><p>{inventory.group}</p></td>
                     <td>{inventory.amount}</td>
                     <td>{this._renderAddInventory(inventory)}</td>
                 </tr>
             ))
     }
 
+    _includesIgnoreCase(value, filter) {
+        const lowerCaseFilter = filter.toLowerCase()
+        return value.toLowerCase().includes(lowerCaseFilter)
+    }
+
     getFilteredInventories(inventories, filter) {
         if (filter) {
-            return _.filter(inventories, (i) => i.description.includes(filter))
+            return _.filter(inventories,
+                (i) => this._includesIgnoreCase(i.description, filter) || this._includesIgnoreCase(i.group, filter))
         }
         return inventories
     }
@@ -83,7 +89,7 @@ export default class InventoryList extends Component {
     }
 
     updateInventoryFilter(e) {
-        this.setState({inventoryFilter: e.target.value})
+        this.setState({ inventoryFilter: e.target.value })
     }
 
     saveInventories() {
