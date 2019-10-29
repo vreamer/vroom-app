@@ -16,7 +16,7 @@ export default class InventoryCopy extends Component {
 
     render() {
         return (
-            <button onClick={() => this.copyAllInventory()} className="btn btn-primary">Copy Inventories Amount</button>
+            <button onClick={() => this.copyAllInventory()} className="btn btn-primary">Copy All</button>
         )
     }
 }

@@ -123,18 +123,11 @@ export default class InventoryList extends Component {
                     <InventoryCopy inventories={this.state.inventories}></InventoryCopy>
                     <button
                         className='btn btn-primary'
-                        onClick={this.saveInventories}>Update Inventory</button>
+                        onClick={this.saveInventories}>Update</button>
                     <input className='form-control' type='text' placeholder='Search by name' onChange={this.updateInventoryFilter} />
                 </div>
                 <div className='inventory-update-table'>
                     <Table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Amount</th>
-                                <th>Add</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             {this._renderInventories()}
                         </tbody>
