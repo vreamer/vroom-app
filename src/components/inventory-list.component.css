@@ -10,3 +10,7 @@ table {
     height: 80vh;
     overflow: scroll;
 }
+
+.badge {
+    margin-left: 5px;
+}

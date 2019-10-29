@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, InputGroup, FormControl, Button } from 'react-bootstrap'
+import { Badge, Table, InputGroup, FormControl, Button } from 'react-bootstrap'
 import { getInventoryByDate, createInventories } from '../services/inventory-service'
 import { getTodayISO } from '../services/date-service'
 import InventoryCopy from './inventory-copy.component'
@@ -53,7 +53,7 @@ export default class InventoryList extends Component {
         return this.getFilteredInventories(this.state.inventories, this.state.inventoryFilter)
             .map(inventory => (
                 <tr className={this._isInventoryInDanger(inventory.amount) ? 'inventory-in-danger' : ''} key={inventory.description}>
-                    <td><p>{inventory.description}</p><p>{inventory.group}</p></td>
+                    <td>{inventory.description}<Badge pill variant='info'>{inventory.group}</Badge></td>
                     <td>{inventory.amount}</td>
                     <td>{this._renderAddInventory(inventory)}</td>
                 </tr>
