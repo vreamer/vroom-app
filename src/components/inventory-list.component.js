@@ -4,14 +4,16 @@ import { getInventoryByDate, createInventories } from '../services/inventory-ser
 import { getTodayISO } from '../services/date-service'
 import InventoryCopy from './inventory-copy.component'
 import './inventory-list.component.css'
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
+import _ from 'lodash'
 
 const today = getTodayISO()
 
 export default class InventoryList extends Component {
     state = {
         inventories: [],
-        newInventories: {}
+        newInventories: {},
+        inventoryFilter: ''
     }
 
     componentDidMount() {
@@ -40,7 +42,7 @@ export default class InventoryList extends Component {
                 />
                 <InputGroup.Append>
                     {inventory.stepAmounts.map(i => (
-                        <Button variant="outline-primary" onClick={() => this.addToInventory(i, inventory)}>{i}</Button>
+                        <Button key={inventory.description + i} variant="outline-primary" onClick={() => this.addToInventory(i, inventory)}>{i}</Button>
                     ))}
                 </InputGroup.Append>
             </InputGroup>
@@ -48,7 +50,7 @@ export default class InventoryList extends Component {
     }
 
     _renderInventories() {
-        return this.state.inventories
+        return this.getFilteredInventories(this.state.inventories, this.state.inventoryFilter)
             .map(inventory => (
                 <tr className={this._isInventoryInDanger(inventory.amount) ? 'inventory-in-danger' : ''} key={inventory.description}>
                     <td>{inventory.description}</td>
@@ -56,6 +58,13 @@ export default class InventoryList extends Component {
                     <td>{this._renderAddInventory(inventory)}</td>
                 </tr>
             ))
+    }
+
+    getFilteredInventories(inventories, filter) {
+        if (filter) {
+            return _.filter(inventories, (i) => i.description.includes(filter))
+        }
+        return inventories
     }
 
     onChangeInventory(amount, inventory) {
@@ -71,6 +80,10 @@ export default class InventoryList extends Component {
     addToInventory(amount, inventory) {
         const prevAmount = this.state.newInventories[inventory.description] || 0
         this.onChangeInventory(prevAmount + amount, inventory)
+    }
+
+    updateInventoryFilter(e) {
+        this.setState({inventoryFilter: e.target.value})
     }
 
     saveInventories() {
@@ -97,6 +110,7 @@ export default class InventoryList extends Component {
                     <button
                         className='btn btn-primary'
                         onClick={this.saveInventories.bind(this)}>Update Inventory</button>
+                    <input className='form-control' type='text' placeholder='Search by name' onChange={this.updateInventoryFilter.bind(this)} />
                 </div>
                 <div className='inventory-update-table'>
                     <Table>
