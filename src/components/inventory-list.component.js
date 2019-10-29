@@ -10,10 +10,18 @@ import _ from 'lodash'
 const today = getTodayISO()
 
 export default class InventoryList extends Component {
-    state = {
-        inventories: [],
-        newInventories: {},
-        inventoryFilter: ''
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            inventories: [],
+            newInventories: {},
+            inventoryFilter: ''
+        }
+
+        this.saveInventories = this.saveInventories.bind(this)
+        this._includesIgnoreCase = this._includesIgnoreCase.bind(this)
+        this.updateInventoryFilter = this.updateInventoryFilter.bind(this)
     }
 
     componentDidMount() {
@@ -115,8 +123,8 @@ export default class InventoryList extends Component {
                     <InventoryCopy inventories={this.state.inventories}></InventoryCopy>
                     <button
                         className='btn btn-primary'
-                        onClick={this.saveInventories.bind(this)}>Update Inventory</button>
-                    <input className='form-control' type='text' placeholder='Search by name' onChange={this.updateInventoryFilter.bind(this)} />
+                        onClick={this.saveInventories}>Update Inventory</button>
+                    <input className='form-control' type='text' placeholder='Search by name' onChange={this.updateInventoryFilter} />
                 </div>
                 <div className='inventory-update-table'>
                     <Table>
