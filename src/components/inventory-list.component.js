@@ -98,18 +98,20 @@ export default class InventoryList extends Component {
                         className='btn btn-primary'
                         onClick={this.saveInventories.bind(this)}>Update Inventory</button>
                 </div>
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Amount</th>
-                            <th>Add</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this._renderInventories()}
-                    </tbody>
-                </Table>
+                <div className='inventory-update-table'>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Add</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this._renderInventories()}
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         )
     }

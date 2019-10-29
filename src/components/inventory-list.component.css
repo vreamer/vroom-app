@@ -5,3 +5,8 @@
 table {
     margin-top: 1rem;
 }
+
+.inventory-update-table {
+    height: 80vh;
+    overflow: scroll;
+}
