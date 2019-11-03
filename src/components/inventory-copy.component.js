@@ -7,8 +7,9 @@ export default class InventoryCopy extends Component {
         const asciiTab = String.fromCharCode(9)
         const inventoryExcelString = this.props.inventories
         .map(i => {
+            const amount = i.amount ? i.amount : ''
             const stockIn = i.hasStockIn ? asciiTab : ''
-            return i.amount + stockIn
+            return amount + stockIn
         })
         .join(asciiTab)
         copy(inventoryExcelString)
