@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login'
 
 import InventoryList from './components/inventory-list.component'
 import ChecklistContainer from './components/checklist/checklists.container'
@@ -10,6 +11,10 @@ import logo from './logo.svg'
 import { ToastContainer } from 'react-toastify';
 
 class App extends Component {
+  googleResponse(e) {
+    console.log(e)
+  }
+
   render() {
     return (
       <Router>
@@ -33,6 +38,12 @@ class App extends Component {
           <br />
           <Route path="/" exact component={ChecklistContainer} />
           <Route path="/inventory" exact component={InventoryList} />
+          <GoogleLogin
+            clientId="944298233834-n03srtjahrkm5fvt8291mr4c8b01qmur.apps.googleusercontent.com"
+            buttonText="Google Login"
+            onSuccess={this.googleResponse}
+            onFailure={this.googleResponse}
+          />
           <ToastContainer
             position="top-center"
             autoClose={1000}
